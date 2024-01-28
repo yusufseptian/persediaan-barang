@@ -27,8 +27,9 @@
 
 <body class="login-page bg-login">
   <div class="login-box">
-    <div style="color:#3c8dbc" class="login-logo">
-      Aplikasi<b>Persediaan</b>
+    <div style="color:#e49520" class="login-logo">
+      <b> Aplikasi
+        <br>Gudang Oricow</b>
     </div><!-- /.login-logo -->
     <?php
     // fungsi untuk menampilkan pesan
@@ -76,7 +77,7 @@
         <br />
         <div class="row">
           <div class="col-xs-12">
-            <input type="submit" class="btn btn-primary btn-lg btn-block btn-flat" name="login" value="Login" />
+            <input type="submit" class="btn btn-warning btn-lg btn-block" name="login" value="Login" />
           </div><!-- /.col -->
         </div>
       </form>

@@ -26,10 +26,26 @@
       // tampilkan pesan Sukses "Data Barang Keluar berhasil disimpan"
       elseif ($_GET['alert'] == 1) {
         echo "<div class='alert alert-success alert-dismissable'>
+      <?php
+      // fungsi untuk menampilkan pesan
+      // jika alert = "" (kosong)
+      // tampilkan pesan "" (kosong)
+      if (empty($_GET['alert'])) {
+        echo "";
+      }
+      // jika alert = 1
+      // tampilkan pesan Sukses "Data Barang Keluar berhasil disimpan"
+      elseif ($_GET['alert'] == 1) {
+        echo "<div class='alert alert-success alert-dismissable'>
               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
               <h4>  <i class='icon fa fa-check-circle'></i> Sukses!</h4>
               Data Barang Keluar berhasil disimpan.
             </div>";
+      }
+      // jika alert = 2
+      // tampilkan pesan Sukses "Data Barang Keluar telah disetujui"
+      elseif ($_GET['alert'] == 2) {
+        echo "<div class='alert alert-success alert-dismissable'>
       }
       // jika alert = 2
       // tampilkan pesan Sukses "Data Barang Keluar telah disetujui"
@@ -44,10 +60,17 @@
       // tampilkan pesan Sukses "Data Barang Keluar telah ditolak"
       elseif ($_GET['alert'] == 3) {
         echo "<div class='alert alert-success alert-dismissable'>
+      }
+      // jika alert = 3
+      // tampilkan pesan Sukses "Data Barang Keluar telah ditolak"
+      elseif ($_GET['alert'] == 3) {
+        echo "<div class='alert alert-success alert-dismissable'>
               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
               <h4>  <i class='icon fa fa-check-circle'></i> Sukses!</h4>
               Data Barang Keluar telah ditolak.
             </div>";
+      }
+      ?>
       }
       ?>
 
@@ -84,7 +107,7 @@
                 $exp            = explode('-', $tanggal);
                 $tanggal_keluar = $exp[2] . "-" . $exp[1] . "-" . $exp[0];
 
-                if ($_SESSION['hak_akses'] == 'Super Admin') {
+                if (isAdmin() or isStaffGudang()) {
                   // menampilkan isi tabel dari database ke tabel di aplikasi
                   echo "<tr>
                         <td width='30' class='center'>$no</td>

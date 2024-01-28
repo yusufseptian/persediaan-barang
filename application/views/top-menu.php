@@ -1,10 +1,10 @@
-<?php  
+<?php
 /* panggil file database.php untuk koneksi ke database */
 require_once "application/connection/database.php";
 
 // fungsi query untuk menampilkan data dari tabel user
 $query = mysqli_query($mysqli, "SELECT id_user, nama_user, foto, hak_akses FROM is_users WHERE id_user='$_SESSION[id_user]'")
-                                or die('Ada kesalahan pada query tampil Manajemen User: '.mysqli_error($mysqli));
+  or die('Ada kesalahan pada query tampil Manajemen User: ' . mysqli_error($mysqli));
 
 // tampilkan data
 $data = mysqli_fetch_assoc($query);
@@ -12,32 +12,30 @@ $data = mysqli_fetch_assoc($query);
 
 <li class="dropdown user user-menu">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-  <!-- User image -->
+    <!-- User image -->
 
-  <?php  
-  if ($data['foto']=="") { ?>
-    <!-- <img src="<?php echo base_url()?>assets/images/user/user-default.png" class="user-image" alt="User Image"/> -->
-  <?php
-  }
-  else { ?>
-    <!-- <img src="<?php echo base_url()?>assets/images/user/<?php echo $data['foto']; ?>" class="user-image" alt="User Image"/> -->
-  <?php
-  }
-  ?>
+    <?php
+    if ($data['foto'] == "") { ?>
+      <!-- <img src="<?php echo base_url() ?>assets/images/user/user-default.png" class="user-image" alt="User Image"/> -->
+    <?php
+    } else { ?>
+      <!-- <img src="<?php echo base_url() ?>assets/images/user/<?php echo $data['foto']; ?>" class="user-image" alt="User Image"/> -->
+    <?php
+    }
+    ?>
 
     <span class="hidden-xs"><?php echo $data['nama_user']; ?> <i style="margin-left:5px" class="fa fa-angle-down"></i></span>
   </a>
   <ul class="dropdown-menu">
     <!-- User image -->
-    <li class="user-header">
+    <li class="user-header" style="background-color: #f19b1a !important">
 
-      <?php  
-      if ($data['foto']=="") { ?>
-        <!-- <img src="<?php echo base_url()?>assets/images/user/user-default.png" class="img-circle" alt="User Image"/> -->
       <?php
-      }
-      else { ?>
-       <!--  <img src="<?php echo base_url()?>assets/images/user/<?php echo $data['foto']; ?>" class="img-circle" alt="User Image"/> -->
+      if ($data['foto'] == "") { ?>
+        <!-- <img src="<?php echo base_url() ?>assets/images/user/user-default.png" class="img-circle" alt="User Image"/> -->
+      <?php
+      } else { ?>
+        <!--  <img src="<?php echo base_url() ?>assets/images/user/<?php echo $data['foto']; ?>" class="img-circle" alt="User Image"/> -->
       <?php
       }
       ?>
@@ -45,10 +43,10 @@ $data = mysqli_fetch_assoc($query);
       <p>
         <?php echo $data['nama_user']; ?>
         <small><?php echo $data['hak_akses']; ?></small>
-       
+
       </p>
     </li>
-    
+
     <!-- Menu Footer-->
     <li class="user-footer">
       <div class="pull-left">
