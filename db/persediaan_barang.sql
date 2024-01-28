@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
--- https://www.phpmyadmin.net/
+-- version 4.5.4.1
+-- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 28 Jan 2024 pada 03.55
--- Versi server: 10.4.27-MariaDB
--- Versi PHP: 7.4.33
+-- Host: localhost
+-- Generation Time: Jan 28, 2024 at 11:52 AM
+-- Server version: 5.7.11
+-- PHP Version: 7.2.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -24,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `is_barang`
+-- Table structure for table `is_barang`
 --
 
 CREATE TABLE `is_barang` (
@@ -32,20 +31,20 @@ CREATE TABLE `is_barang` (
   `nama_barang` varchar(100) NOT NULL,
   `id_jenis` int(11) NOT NULL,
   `id_satuan` int(11) NOT NULL,
-  `stok` int(11) NOT NULL DEFAULT 0,
+  `stok` int(11) NOT NULL DEFAULT '0',
   `safety_stok` int(11) NOT NULL,
-  `warning_stok` int(11) NOT NULL DEFAULT 0,
-  `penjualan_harian` int(11) NOT NULL DEFAULT 0,
+  `warning_stok` int(11) NOT NULL DEFAULT '0',
+  `penjualan_harian` int(11) NOT NULL DEFAULT '0',
   `created_user` smallint(6) NOT NULL,
   `created_date` timestamp NULL DEFAULT NULL,
   `updated_user` smallint(6) NOT NULL,
-  `updated_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted_user` int(11) NOT NULL,
   `deleted_date` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `is_barang`
+-- Dumping data for table `is_barang`
 --
 
 INSERT INTO `is_barang` (`id_barang`, `nama_barang`, `id_jenis`, `id_satuan`, `stok`, `safety_stok`, `warning_stok`, `penjualan_harian`, `created_user`, `created_date`, `updated_user`, `updated_date`, `deleted_user`, `deleted_date`) VALUES
@@ -64,7 +63,7 @@ INSERT INTO `is_barang` (`id_barang`, `nama_barang`, `id_jenis`, `id_satuan`, `s
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `is_barang_keluar`
+-- Table structure for table `is_barang_keluar`
 --
 
 CREATE TABLE `is_barang_keluar` (
@@ -74,11 +73,11 @@ CREATE TABLE `is_barang_keluar` (
   `jumlah_keluar` int(11) NOT NULL,
   `status` enum('Proses','Approve','Reject') NOT NULL DEFAULT 'Proses',
   `created_user` smallint(6) NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `is_barang_keluar`
+-- Dumping data for table `is_barang_keluar`
 --
 
 INSERT INTO `is_barang_keluar` (`id_barang_keluar`, `tanggal_keluar`, `id_barang`, `jumlah_keluar`, `status`, `created_user`, `created_date`) VALUES
@@ -91,7 +90,7 @@ INSERT INTO `is_barang_keluar` (`id_barang_keluar`, `tanggal_keluar`, `id_barang
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `is_barang_masuk`
+-- Table structure for table `is_barang_masuk`
 --
 
 CREATE TABLE `is_barang_masuk` (
@@ -101,11 +100,11 @@ CREATE TABLE `is_barang_masuk` (
   `jumlah_masuk` int(11) NOT NULL,
   `safety_stok` varchar(100) DEFAULT NULL,
   `created_user` smallint(6) NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `is_barang_masuk`
+-- Dumping data for table `is_barang_masuk`
 --
 
 INSERT INTO `is_barang_masuk` (`id_barang_masuk`, `tanggal_masuk`, `id_barang`, `jumlah_masuk`, `safety_stok`, `created_user`, `created_date`) VALUES
@@ -125,22 +124,22 @@ INSERT INTO `is_barang_masuk` (`id_barang_masuk`, `tanggal_masuk`, `id_barang`, 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `is_jenis_barang`
+-- Table structure for table `is_jenis_barang`
 --
 
 CREATE TABLE `is_jenis_barang` (
   `id_jenis` int(11) NOT NULL,
   `nama_jenis` varchar(50) NOT NULL,
   `created_user` smallint(6) NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_user` smallint(6) NOT NULL,
-  `updated_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted_user` int(11) NOT NULL,
   `deleted_date` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `is_jenis_barang`
+-- Dumping data for table `is_jenis_barang`
 --
 
 INSERT INTO `is_jenis_barang` (`id_jenis`, `nama_jenis`, `created_user`, `created_date`, `updated_user`, `updated_date`, `deleted_user`, `deleted_date`) VALUES
@@ -158,22 +157,22 @@ INSERT INTO `is_jenis_barang` (`id_jenis`, `nama_jenis`, `created_user`, `create
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `is_satuan`
+-- Table structure for table `is_satuan`
 --
 
 CREATE TABLE `is_satuan` (
   `id_satuan` int(11) NOT NULL,
   `nama_satuan` varchar(30) NOT NULL,
   `created_user` smallint(6) NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_user` smallint(6) NOT NULL,
-  `updated_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted_user` int(11) NOT NULL,
   `deleted_date` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `is_satuan`
+-- Dumping data for table `is_satuan`
 --
 
 INSERT INTO `is_satuan` (`id_satuan`, `nama_satuan`, `created_user`, `created_date`, `updated_user`, `updated_date`, `deleted_user`, `deleted_date`) VALUES
@@ -192,7 +191,7 @@ INSERT INTO `is_satuan` (`id_satuan`, `nama_satuan`, `created_user`, `created_da
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `is_users`
+-- Table structure for table `is_users`
 --
 
 CREATE TABLE `is_users` (
@@ -205,12 +204,12 @@ CREATE TABLE `is_users` (
   `foto` varchar(100) DEFAULT NULL,
   `hak_akses` enum('Super Admin','Manajer','Gudang') NOT NULL,
   `status` enum('aktif','blokir') NOT NULL DEFAULT 'aktif',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `is_users`
+-- Dumping data for table `is_users`
 --
 
 INSERT INTO `is_users` (`id_user`, `username`, `nama_user`, `password`, `email`, `telepon`, `foto`, `hak_akses`, `status`, `created_at`, `updated_at`) VALUES
@@ -227,7 +226,7 @@ INSERT INTO `is_users` (`id_user`, `username`, `nama_user`, `password`, `email`,
 --
 
 --
--- Indeks untuk tabel `is_barang`
+-- Indexes for table `is_barang`
 --
 ALTER TABLE `is_barang`
   ADD PRIMARY KEY (`id_barang`),
@@ -237,7 +236,7 @@ ALTER TABLE `is_barang`
   ADD KEY `updated_user` (`updated_user`);
 
 --
--- Indeks untuk tabel `is_barang_keluar`
+-- Indexes for table `is_barang_keluar`
 --
 ALTER TABLE `is_barang_keluar`
   ADD PRIMARY KEY (`id_barang_keluar`),
@@ -245,7 +244,7 @@ ALTER TABLE `is_barang_keluar`
   ADD KEY `created_user` (`created_user`);
 
 --
--- Indeks untuk tabel `is_barang_masuk`
+-- Indexes for table `is_barang_masuk`
 --
 ALTER TABLE `is_barang_masuk`
   ADD PRIMARY KEY (`id_barang_masuk`),
@@ -253,7 +252,7 @@ ALTER TABLE `is_barang_masuk`
   ADD KEY `created_user` (`created_user`);
 
 --
--- Indeks untuk tabel `is_jenis_barang`
+-- Indexes for table `is_jenis_barang`
 --
 ALTER TABLE `is_jenis_barang`
   ADD PRIMARY KEY (`id_jenis`),
@@ -261,7 +260,7 @@ ALTER TABLE `is_jenis_barang`
   ADD KEY `updated_user` (`updated_user`);
 
 --
--- Indeks untuk tabel `is_satuan`
+-- Indexes for table `is_satuan`
 --
 ALTER TABLE `is_satuan`
   ADD PRIMARY KEY (`id_satuan`),
@@ -269,40 +268,37 @@ ALTER TABLE `is_satuan`
   ADD KEY `updated_user` (`updated_user`);
 
 --
--- Indeks untuk tabel `is_users`
+-- Indexes for table `is_users`
 --
 ALTER TABLE `is_users`
   ADD PRIMARY KEY (`id_user`),
   ADD KEY `level` (`hak_akses`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `is_jenis_barang`
+-- AUTO_INCREMENT for table `is_jenis_barang`
 --
 ALTER TABLE `is_jenis_barang`
   MODIFY `id_jenis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
 --
--- AUTO_INCREMENT untuk tabel `is_satuan`
+-- AUTO_INCREMENT for table `is_satuan`
 --
 ALTER TABLE `is_satuan`
   MODIFY `id_satuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
 --
--- AUTO_INCREMENT untuk tabel `is_users`
+-- AUTO_INCREMENT for table `is_users`
 --
 ALTER TABLE `is_users`
   MODIFY `id_user` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
+-- Constraints for dumped tables
+--
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
---
-
---
--- Ketidakleluasaan untuk tabel `is_barang`
+-- Constraints for table `is_barang`
 --
 ALTER TABLE `is_barang`
   ADD CONSTRAINT `is_barang_ibfk_1` FOREIGN KEY (`created_user`) REFERENCES `is_users` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -311,33 +307,32 @@ ALTER TABLE `is_barang`
   ADD CONSTRAINT `is_barang_ibfk_4` FOREIGN KEY (`id_jenis`) REFERENCES `is_jenis_barang` (`id_jenis`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `is_barang_keluar`
+-- Constraints for table `is_barang_keluar`
 --
 ALTER TABLE `is_barang_keluar`
   ADD CONSTRAINT `is_barang_keluar_ibfk_1` FOREIGN KEY (`created_user`) REFERENCES `is_users` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `is_barang_keluar_ibfk_2` FOREIGN KEY (`id_barang`) REFERENCES `is_barang` (`id_barang`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `is_barang_masuk`
+-- Constraints for table `is_barang_masuk`
 --
 ALTER TABLE `is_barang_masuk`
   ADD CONSTRAINT `is_barang_masuk_ibfk_1` FOREIGN KEY (`created_user`) REFERENCES `is_users` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `is_barang_masuk_ibfk_2` FOREIGN KEY (`id_barang`) REFERENCES `is_barang` (`id_barang`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `is_jenis_barang`
+-- Constraints for table `is_jenis_barang`
 --
 ALTER TABLE `is_jenis_barang`
   ADD CONSTRAINT `is_jenis_barang_ibfk_1` FOREIGN KEY (`created_user`) REFERENCES `is_users` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `is_jenis_barang_ibfk_2` FOREIGN KEY (`updated_user`) REFERENCES `is_users` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `is_satuan`
+-- Constraints for table `is_satuan`
 --
 ALTER TABLE `is_satuan`
   ADD CONSTRAINT `is_satuan_ibfk_1` FOREIGN KEY (`created_user`) REFERENCES `is_users` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `is_satuan_ibfk_2` FOREIGN KEY (`updated_user`) REFERENCES `is_users` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

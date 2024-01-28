@@ -6,7 +6,7 @@ require_once "application/connection/fungsi_tanggal.php";
 
 // fungsi untuk pengecekan status login user 
 // jika user belum login, alihkan ke halaman login dan tampilkan message = 1
-if (empty($_SESSION['username']) && empty($_SESSION['password'])){
+if (empty($_SESSION['username']) && empty($_SESSION['password'])) {
 	echo "<meta http-equiv='refresh' content='0; url=index.php?alert=1'>";
 }
 // jika user sudah login, maka jalankan perintah untuk pemanggilan file halaman konten
@@ -26,7 +26,7 @@ else {
 		include "modules/barang/form.php";
 	}
 	// -----------------------------------------------------------------------------
-	
+
 	// jika halaman konten yang dipilih jenis, panggil file view jenis
 	elseif ($_GET['module'] == 'jenis') {
 		include "modules/jenis/view.php";
@@ -48,7 +48,7 @@ else {
 		include "modules/satuan/form.php";
 	}
 	// -----------------------------------------------------------------------------
-	
+
 	// jika halaman konten yang dipilih barang masuk, panggil file view barang masuk
 	elseif ($_GET['module'] == 'barang_masuk') {
 		include "modules/barang-masuk/view.php";
@@ -122,10 +122,9 @@ else {
 		include "modules/profil/form.php";
 	}
 	// -----------------------------------------------------------------------------
-	
+
 	// jika halaman konten yang dipilih password, panggil file view password
 	elseif ($_GET['module'] == 'password') {
 		include "modules/password/view.php";
 	}
 }
-?>

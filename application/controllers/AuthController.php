@@ -43,8 +43,11 @@ class AuthController extends CI_Controller
         }
     }
 
-    protected function redirectBack()
+    protected function redirectBack(string $msg = null, string $key = 'danger')
     {
+        if (trim((string)$msg) != '' && trim((string)$key) != '') {
+            $_SESSION[$key] = $msg;
+        }
         echo "<script>window.history.back()</script>";
         die;
     }

@@ -60,6 +60,9 @@
     <div class="login-box-body">
       <p class="login-box-msg"><i class="fa fa-user icon-title"></i> Silahkan Login</p>
       <br />
+      <?php if (isset($_SESSION['danger'])) : ?>
+        <div class="alert alert-danger" role="alert"><?= $_SESSION['danger'] ?></div>
+      <?php endif ?>
       <form action="<?php echo base_url() ?>home/login" method="POST">
         <div class="form-group has-feedback">
           <input type="text" class="form-control" name="username" placeholder="Username" autocomplete="off" required />
