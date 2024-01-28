@@ -1,9 +1,14 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+require_once "AuthController.php";
 
-class Home extends CI_Controller
+class Home extends AuthController
 {
-
+	function __construct()
+	{
+		$this->isUseAuth = false;
+		parent::__construct();
+	}
 	/**
 	 * Index Page for this controller.
 	 *
@@ -21,6 +26,10 @@ class Home extends CI_Controller
 	 */
 	public function index()
 	{
+		if ($this->isLoggedIn()) {
+			return $this->redirectBack();
+		}
+		$this->isUseAuth = false;
 		$this->load->view('login');
 	}
 	function login()
@@ -65,6 +74,13 @@ class Home extends CI_Controller
 
 	function dashboard()
 	{
+		$this->load->helper('rbac');
+		$this->authCheck();
+		if ($this->input->get('module') == "barang" || $this->input->get('module') == "jenis" || $this->input->get('module') == "satuan" || $this->input->get('module') == "user") {
+			$this->accessAllowed(['Super Admin']);
+		} elseif ($this->input->get('module') == "barang_masuk" || $this->input->get('module') == "barang_keluar") {
+			$this->accessAllowed(['Super Admin', 'Gudang']);
+		}
 		$this->load->view('main', 'modules/beranda/view');
 	}
 

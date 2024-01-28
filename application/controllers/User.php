@@ -1,20 +1,23 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
+require_once "AuthController.php";
 
-class User extends CI_Controller {
+class User extends AuthController
+{
 
-	public function __construct(){ 
-        parent::__construct();
-       
-    }
+	public function __construct()
+	{
+		parent::__construct();
+	}
 	public function index()
 	{
 		$this->load->view('login');
 	}
-	
 
-	function save_data(){
-		 require_once "application/connection/database.php";
+
+	function save_data()
+	{
+		require_once "application/connection/database.php";
 		if (isset($_POST['simpan'])) {
 			// ambil data hasil submit dari form
 			$username  = mysqli_real_escape_string($mysqli, trim($_POST['username']));
@@ -23,20 +26,21 @@ class User extends CI_Controller {
 			$hak_akses = mysqli_real_escape_string($mysqli, trim($_POST['hak_akses']));
 
 			// perintah query untuk menyimpan data ke tabel users
-            $query = mysqli_query($mysqli, "INSERT INTO is_users(username,password,nama_user,hak_akses)
+			$query = mysqli_query($mysqli, "INSERT INTO is_users(username,password,nama_user,hak_akses)
                                             VALUES('$username','$password','$nama_user','$hak_akses')")
-                                            or die('Ada kesalahan pada query insert : '.mysqli_error($mysqli));    
+				or die('Ada kesalahan pada query insert : ' . mysqli_error($mysqli));
 
-            // cek query
-            if ($query) {
-                // jika berhasil tampilkan pesan berhasil simpan data
-                redirect("home/dashboard?module=user&alert=1");
-            }
+			// cek query
+			if ($query) {
+				// jika berhasil tampilkan pesan berhasil simpan data
+				redirect("home/dashboard?module=user&alert=1");
+			}
 		}
 	}
 
-	function update_data(){
-		 require_once "application/connection/database.php";
+	function update_data()
+	{
+		require_once "application/connection/database.php";
 		if (isset($_POST['simpan'])) {
 			if (isset($_POST['id_user'])) {
 				// ambil data hasil submit dari form
@@ -47,18 +51,18 @@ class User extends CI_Controller {
 				$email              = mysqli_real_escape_string($mysqli, trim($_POST['email']));
 				$telepon            = mysqli_real_escape_string($mysqli, trim($_POST['telepon']));
 				$hak_akses          = mysqli_real_escape_string($mysqli, trim($_POST['hak_akses']));
-				
+
 				$nama_file          = $_FILES['foto']['name'];
 				$ukuran_file        = $_FILES['foto']['size'];
 				$tipe_file          = $_FILES['foto']['type'];
 				$tmp_file           = $_FILES['foto']['tmp_name'];
-				
+
 				// tentuka extension yang diperbolehkan
-				$allowed_extensions = array('jpg','jpeg','png');
-				
+				$allowed_extensions = array('jpg', 'jpeg', 'png');
+
 				// Set path folder tempat menyimpan gambarnya
-				$path_file          = "../../images/user/".$nama_file;
-				
+				$path_file          = "../../images/user/" . $nama_file;
+
 				// check extension
 				$file               = explode(".", $nama_file);
 				$extension          = array_pop($file);
@@ -66,88 +70,88 @@ class User extends CI_Controller {
 				// jika password tidak diubah dan foto tidak diubah
 				if (empty($_POST['password']) && empty($_FILES['foto']['name'])) {
 					// perintah query untuk mengubah data pada tabel users
-                    $query = mysqli_query($mysqli, "UPDATE is_users SET username 	= '$username',
+					$query = mysqli_query($mysqli, "UPDATE is_users SET username 	= '$username',
                     													nama_user 	= '$nama_user',
                     													email       = '$email',
                     													telepon     = '$telepon',
                     													hak_akses   = '$hak_akses'
                                                                   WHERE id_user 	= '$id_user'")
-                                                    or die('Ada kesalahan pada query update : '.mysqli_error($mysqli));
+						or die('Ada kesalahan pada query update : ' . mysqli_error($mysqli));
 
-                    // cek query
-                    if ($query) {
-                        // jika berhasil tampilkan pesan berhasil update data
-                        redirect("home/dashboard?module=user&alert=2");
-                    }
+					// cek query
+					if ($query) {
+						// jika berhasil tampilkan pesan berhasil update data
+						redirect("home/dashboard?module=user&alert=2");
+					}
 				}
 				// jika password diubah dan foto tidak diubah
 				elseif (!empty($_POST['password']) && empty($_FILES['foto']['name'])) {
 					// perintah query untuk mengubah data pada tabel users
-                    $query = mysqli_query($mysqli, "UPDATE is_users SET username 	= '$username',
+					$query = mysqli_query($mysqli, "UPDATE is_users SET username 	= '$username',
                     													nama_user 	= '$nama_user',
                     													password 	= '$password',
                     													email       = '$email',
                     													telepon     = '$telepon',
                     													hak_akses   = '$hak_akses'
                                                                   WHERE id_user 	= '$id_user'")
-                                                    or die('Ada kesalahan pada query update : '.mysqli_error($mysqli));
+						or die('Ada kesalahan pada query update : ' . mysqli_error($mysqli));
 
-                    // cek query
-                    if ($query) {
-                        // jika berhasil tampilkan pesan berhasil update data
-                        redirect("home/dashboard?module=user&alert=2");
-                    }
+					// cek query
+					if ($query) {
+						// jika berhasil tampilkan pesan berhasil update data
+						redirect("home/dashboard?module=user&alert=2");
+					}
 				}
 				// jika password tidak diubah dan foto diubah
 				elseif (empty($_POST['password']) && !empty($_FILES['foto']['name'])) {
 					// Cek apakah tipe file yang diupload sesuai dengan allowed_extensions
 					if (in_array($extension, $allowed_extensions)) {
-	                    // Jika tipe file yang diupload sesuai dengan allowed_extensions, lakukan :
-	                    if($ukuran_file <= 1000000) { // Cek apakah ukuran file yang diupload kurang dari sama dengan 1MB
-	                        // Jika ukuran file kurang dari sama dengan 1MB, lakukan :
-	                        // Proses upload
-	                        if(move_uploaded_file($tmp_file, $path_file)) { // Cek apakah gambar berhasil diupload atau tidak
-                        		// Jika gambar berhasil diupload, Lakukan : 
-                        		// perintah query untuk mengubah data pada tabel users
-			                    $query = mysqli_query($mysqli, "UPDATE is_users SET username 	= '$username',
+						// Jika tipe file yang diupload sesuai dengan allowed_extensions, lakukan :
+						if ($ukuran_file <= 1000000) { // Cek apakah ukuran file yang diupload kurang dari sama dengan 1MB
+							// Jika ukuran file kurang dari sama dengan 1MB, lakukan :
+							// Proses upload
+							if (move_uploaded_file($tmp_file, $path_file)) { // Cek apakah gambar berhasil diupload atau tidak
+								// Jika gambar berhasil diupload, Lakukan : 
+								// perintah query untuk mengubah data pada tabel users
+								$query = mysqli_query($mysqli, "UPDATE is_users SET username 	= '$username',
 			                    													nama_user 	= '$nama_user',
 			                    													email       = '$email',
 			                    													telepon     = '$telepon',
 			                    													foto 		= '$nama_file',
 			                    													hak_akses   = '$hak_akses'
 			                                                                  WHERE id_user 	= '$id_user'")
-			                                                    or die('Ada kesalahan pada query update : '.mysqli_error($mysqli));
+									or die('Ada kesalahan pada query update : ' . mysqli_error($mysqli));
 
-			                    // cek query
-			                    if ($query) {
-			                        // jika berhasil tampilkan pesan berhasil update data
-			                        redirect("home/dashboard?module=user&alert=2");
-			                    }
-                        	} else {
-	                            // Jika gambar gagal diupload, tampilkan pesan gagal upload
-	                            redirect("home/dashboard?module=user&alert=5");
-	                        }
-	                    } else {
-	                        // Jika ukuran file lebih dari 1MB, tampilkan pesan gagal upload
-	                        redirect("home/dashboard?module=user&alert=6");
-	                    }
-	                } else {
-	                    // Jika tipe file yang diupload bukan jpg, jpeg, png, tampilkan pesan gagal upload
-	                    redirect("home/dashboard?module=user&alert=7");
-	                } 
+								// cek query
+								if ($query) {
+									// jika berhasil tampilkan pesan berhasil update data
+									redirect("home/dashboard?module=user&alert=2");
+								}
+							} else {
+								// Jika gambar gagal diupload, tampilkan pesan gagal upload
+								redirect("home/dashboard?module=user&alert=5");
+							}
+						} else {
+							// Jika ukuran file lebih dari 1MB, tampilkan pesan gagal upload
+							redirect("home/dashboard?module=user&alert=6");
+						}
+					} else {
+						// Jika tipe file yang diupload bukan jpg, jpeg, png, tampilkan pesan gagal upload
+						redirect("home/dashboard?module=user&alert=7");
+					}
 				}
 				// jika password diubah dan foto diubah
 				else {
 					// Cek apakah tipe file yang diupload sesuai dengan allowed_extensions
 					if (in_array($extension, $allowed_extensions)) {
-	                    // Jika tipe file yang diupload sesuai dengan allowed_extensions, lakukan :
-	                    if($ukuran_file <= 1000000) { // Cek apakah ukuran file yang diupload kurang dari sama dengan 1MB
-	                        // Jika ukuran file kurang dari sama dengan 1MB, lakukan :
-	                        // Proses upload
-	                        if(move_uploaded_file($tmp_file, $path_file)) { // Cek apakah gambar berhasil diupload atau tidak
-                        		// Jika gambar berhasil diupload, Lakukan : 
-                        		// perintah query untuk mengubah data pada tabel users
-			                    $query = mysqli_query($mysqli, "UPDATE is_users SET username 	= '$username',
+						// Jika tipe file yang diupload sesuai dengan allowed_extensions, lakukan :
+						if ($ukuran_file <= 1000000) { // Cek apakah ukuran file yang diupload kurang dari sama dengan 1MB
+							// Jika ukuran file kurang dari sama dengan 1MB, lakukan :
+							// Proses upload
+							if (move_uploaded_file($tmp_file, $path_file)) { // Cek apakah gambar berhasil diupload atau tidak
+								// Jika gambar berhasil diupload, Lakukan : 
+								// perintah query untuk mengubah data pada tabel users
+								$query = mysqli_query($mysqli, "UPDATE is_users SET username 	= '$username',
 			                    													nama_user 	= '$nama_user',
 			                    													password    = '$password',
 			                    													email       = '$email',
@@ -155,67 +159,69 @@ class User extends CI_Controller {
 			                    													foto 		= '$nama_file',
 			                    													hak_akses   = '$hak_akses'
 			                                                                  WHERE id_user 	= '$id_user'")
-			                                                    or die('Ada kesalahan pada query update : '.mysqli_error($mysqli));
+									or die('Ada kesalahan pada query update : ' . mysqli_error($mysqli));
 
-			                    // cek query
-			                    if ($query) {
-			                        // jika berhasil tampilkan pesan berhasil update data
-			                        redirect("home/dashboard?module=user&alert=2");
-			                    }
-                        	} else {
-	                            // Jika gambar gagal diupload, tampilkan pesan gagal upload
-	                            redirect("home/dashboard?module=user&alert=5");
-	                        }
-	                    } else {
-	                        // Jika ukuran file lebih dari 1MB, tampilkan pesan gagal upload
-	                        redirect("home/dashboard?module=user&alert=6");
-	                    }
-	                } else {
-	                    // Jika tipe file yang diupload bukan jpg, jpeg, png, tampilkan pesan gagal upload
-	                    redirect("home/dashboard?module=user&alert=7");
-	                } 
+								// cek query
+								if ($query) {
+									// jika berhasil tampilkan pesan berhasil update data
+									redirect("home/dashboard?module=user&alert=2");
+								}
+							} else {
+								// Jika gambar gagal diupload, tampilkan pesan gagal upload
+								redirect("home/dashboard?module=user&alert=5");
+							}
+						} else {
+							// Jika ukuran file lebih dari 1MB, tampilkan pesan gagal upload
+							redirect("home/dashboard?module=user&alert=6");
+						}
+					} else {
+						// Jika tipe file yang diupload bukan jpg, jpeg, png, tampilkan pesan gagal upload
+						redirect("home/dashboard?module=user&alert=7");
+					}
 				}
 			}
 		}
 	}
 
-	function change(){
-		 require_once "application/connection/database.php";
+	function change()
+	{
+		require_once "application/connection/database.php";
 		if (isset($_GET['id'])) {
 			// ambil data hasil submit dari form
 			$id_user = $_GET['id'];
 			$status  = "aktif";
 
 			// perintah query untuk mengubah data pada tabel users
-            $query = mysqli_query($mysqli, "UPDATE is_users SET status  = '$status'
+			$query = mysqli_query($mysqli, "UPDATE is_users SET status  = '$status'
                                                           WHERE id_user = '$id_user'")
-                                            or die('Ada kesalahan pada query update status on : '.mysqli_error($mysqli));
+				or die('Ada kesalahan pada query update status on : ' . mysqli_error($mysqli));
 
-            // cek query
-            if ($query) {
-                // jika berhasil tampilkan pesan berhasil update data
-                redirect("home/dashboard?module=user&alert=3");
-            }
+			// cek query
+			if ($query) {
+				// jika berhasil tampilkan pesan berhasil update data
+				redirect("home/dashboard?module=user&alert=3");
+			}
 		}
 	}
 
-	function change_block(){
-		 require_once "application/connection/database.php";
+	function change_block()
+	{
+		require_once "application/connection/database.php";
 		if (isset($_GET['id'])) {
 			// ambil data hasil submit dari form
 			$id_user = $_GET['id'];
 			$status  = "blokir";
 
 			// perintah query untuk mengubah data pada tabel users
-            $query = mysqli_query($mysqli, "UPDATE is_users SET status  = '$status'
+			$query = mysqli_query($mysqli, "UPDATE is_users SET status  = '$status'
                                                           WHERE id_user = '$id_user'")
-                                            or die('Ada kesalahan pada query update status on : '.mysqli_error($mysqli));
+				or die('Ada kesalahan pada query update status on : ' . mysqli_error($mysqli));
 
-            // cek query
-            if ($query) {
-                // jika berhasil tampilkan pesan berhasil update data
-                redirect("home/dashboard?module=user&alert=4");
-            }
+			// cek query
+			if ($query) {
+				// jika berhasil tampilkan pesan berhasil update data
+				redirect("home/dashboard?module=user&alert=4");
+			}
 		}
 	}
 }
