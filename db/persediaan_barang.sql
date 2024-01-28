@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 27 Jan 2024 pada 08.02
+-- Waktu pembuatan: 28 Jan 2024 pada 03.55
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 7.4.33
 
@@ -37,27 +37,29 @@ CREATE TABLE `is_barang` (
   `warning_stok` int(11) NOT NULL DEFAULT 0,
   `penjualan_harian` int(11) NOT NULL DEFAULT 0,
   `created_user` smallint(6) NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_date` timestamp NULL DEFAULT NULL,
   `updated_user` smallint(6) NOT NULL,
-  `updated_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `updated_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `deleted_user` int(11) NOT NULL,
+  `deleted_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data untuk tabel `is_barang`
 --
 
-INSERT INTO `is_barang` (`id_barang`, `nama_barang`, `id_jenis`, `id_satuan`, `stok`, `safety_stok`, `warning_stok`, `penjualan_harian`, `created_user`, `created_date`, `updated_user`, `updated_date`) VALUES
-('B000001', 'Aqua AQR D181', 4, 9, 120, 0, 20, 0, 1, '2023-06-27 15:36:13', 1, '2024-01-27 06:08:27'),
-('B000002', 'Cosmos 16-SDA 3 in 1', 5, 9, 30, 0, 20, 0, 1, '2023-06-27 15:37:11', 1, '2023-07-05 14:18:38'),
-('B000003', 'Cosmos CRJ-3201 Digital', 1, 10, 50, 0, 20, 0, 1, '2023-06-27 15:38:37', 1, '2023-06-27 15:43:29'),
-('B000004', 'Miyako WD-189 H', 9, 10, 40, 0, 20, 0, 1, '2023-06-27 15:40:05', 1, '2023-07-05 14:19:24'),
-('B000005', 'Panasonic Mesin Cuci Na-w7BBz', 7, 9, 50, 0, 20, 0, 1, '2023-06-27 15:40:46', 1, '2023-06-27 15:44:00'),
-('B000006', 'Panasonic TV LED TH 24F305G', 6, 9, 50, 0, 20, 0, 1, '2023-06-27 15:41:42', 1, '2023-06-27 15:44:11'),
-('B000007', 'Advance M10BT', 2, 10, 10, 0, 20, 0, 1, '2023-06-27 15:42:19', 1, '2023-07-17 03:18:14'),
-('B000008', 'Kipas angin', 5, 9, 30, 0, 20, 0, 8, '2023-07-14 06:19:13', 8, '2023-07-14 06:20:13'),
-('B000009', 'PMA 9310', 2, 9, 90, 10, 0, 0, 1, '2024-01-26 07:58:08', 1, '2024-01-27 06:21:17'),
-('B000010', 'PMA', 2, 9, 100, 12, 0, 0, 1, '2024-01-26 08:04:20', 1, '2024-01-27 06:20:13'),
-('B000011', 'Samsung', 6, 9, 100, 10, 0, 0, 1, '2024-01-26 08:11:23', 1, '2024-01-27 06:20:41');
+INSERT INTO `is_barang` (`id_barang`, `nama_barang`, `id_jenis`, `id_satuan`, `stok`, `safety_stok`, `warning_stok`, `penjualan_harian`, `created_user`, `created_date`, `updated_user`, `updated_date`, `deleted_user`, `deleted_date`) VALUES
+('B000001', 'Aqua AQR D181', 4, 9, 120, 0, 20, 0, 1, '2023-06-27 15:36:13', 1, '2024-01-28 02:38:23', 0, NULL),
+('B000002', 'Cosmos 16-SDA 3 in 1', 5, 9, 30, 0, 20, 0, 1, '2023-06-27 15:37:11', 1, '2024-01-28 02:38:29', 0, NULL),
+('B000003', 'Cosmos CRJ-3201 Digital', 1, 10, 50, 0, 20, 0, 1, '2023-06-27 15:38:37', 1, '2023-06-27 15:43:29', 0, NULL),
+('B000004', 'Miyako WD-189 H', 9, 10, 40, 0, 20, 0, 1, '2023-06-27 15:40:05', 1, '2023-07-05 14:19:24', 0, NULL),
+('B000005', 'Panasonic Mesin Cuci Na-w7BBz', 7, 9, 50, 0, 20, 0, 1, '2023-06-27 15:40:46', 1, '2023-06-27 15:44:00', 0, NULL),
+('B000006', 'Panasonic TV LED TH 24F305G', 6, 9, 50, 0, 20, 0, 1, '2023-06-27 15:41:42', 1, '2023-06-27 15:44:11', 0, NULL),
+('B000007', 'Advance M10BT', 2, 10, 10, 0, 20, 0, 1, '2023-06-27 15:42:19', 1, '2023-07-17 03:18:14', 0, NULL),
+('B000008', 'Kipas angin', 5, 9, 30, 0, 20, 0, 8, '2023-07-14 06:19:13', 8, '2023-07-14 06:20:13', 0, NULL),
+('B000009', 'PMA 9310', 2, 9, 90, 10, 0, 0, 1, '2024-01-26 07:58:08', 1, '2024-01-27 06:21:17', 0, NULL),
+('B000010', 'PMA', 2, 9, 100, 12, 0, 0, 1, '2024-01-26 08:04:20', 1, '2024-01-27 06:20:13', 0, NULL),
+('B000011', 'Samsung', 6, 9, 100, 10, 0, 0, 1, '2024-01-26 08:11:23', 1, '2024-01-28 02:48:29', 1, '2024-01-28 09:48:29');
 
 -- --------------------------------------------------------
 
@@ -132,23 +134,26 @@ CREATE TABLE `is_jenis_barang` (
   `created_user` smallint(6) NOT NULL,
   `created_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_user` smallint(6) NOT NULL,
-  `updated_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `updated_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `deleted_user` int(11) NOT NULL,
+  `deleted_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data untuk tabel `is_jenis_barang`
 --
 
-INSERT INTO `is_jenis_barang` (`id_jenis`, `nama_jenis`, `created_user`, `created_date`, `updated_user`, `updated_date`) VALUES
-(1, 'Rice Cooker', 3, '2017-03-12 02:59:45', 1, '2023-06-27 15:34:37'),
-(2, 'Speaker', 3, '2017-03-12 02:59:58', 1, '2023-06-27 15:33:39'),
-(3, 'Kompor Listrik', 3, '2017-03-12 03:00:08', 1, '2023-06-27 15:33:24'),
-(4, 'Kulkas', 3, '2017-03-12 03:00:19', 1, '2023-06-27 15:33:06'),
-(5, 'Kipas angin', 3, '2017-03-12 03:00:29', 1, '2023-06-27 15:32:55'),
-(6, 'Televisi', 3, '2017-03-12 03:00:39', 1, '2023-06-27 15:32:45'),
-(7, 'Mesin Cuci', 3, '2017-03-12 03:00:49', 1, '2023-06-27 15:32:34'),
-(9, 'Dispenser', 1, '2023-06-27 15:39:33', 1, '2023-06-27 15:39:33'),
-(10, 'nganu aja', 1, '2024-01-27 05:47:15', 1, '2024-01-27 06:21:48');
+INSERT INTO `is_jenis_barang` (`id_jenis`, `nama_jenis`, `created_user`, `created_date`, `updated_user`, `updated_date`, `deleted_user`, `deleted_date`) VALUES
+(1, 'Rice Cooker', 3, '2017-03-12 02:59:45', 1, '2023-06-27 15:34:37', 0, NULL),
+(2, 'Speaker', 3, '2017-03-12 02:59:58', 1, '2023-06-27 15:33:39', 0, NULL),
+(3, 'Kompor Listrik', 3, '2017-03-12 03:00:08', 1, '2023-06-27 15:33:24', 0, NULL),
+(4, 'Kulkas', 3, '2017-03-12 03:00:19', 1, '2023-06-27 15:33:06', 0, NULL),
+(5, 'Kipas angin', 3, '2017-03-12 03:00:29', 1, '2023-06-27 15:32:55', 0, NULL),
+(6, 'Televisi', 3, '2017-03-12 03:00:39', 1, '2023-06-27 15:32:45', 0, NULL),
+(7, 'Mesin Cuci', 3, '2017-03-12 03:00:49', 1, '2023-06-27 15:32:34', 0, NULL),
+(9, 'Dispenser', 1, '2023-06-27 15:39:33', 1, '2023-06-27 15:39:33', 0, NULL),
+(10, 'nganu aja', 1, '2024-01-27 05:47:15', 1, '2024-01-27 09:45:00', 0, '2024-01-01 16:44:56'),
+(11, 'nganu hehe', 1, '2024-01-28 02:53:15', 1, '2024-01-28 02:53:34', 1, '2024-01-28 09:53:34');
 
 -- --------------------------------------------------------
 
@@ -162,25 +167,27 @@ CREATE TABLE `is_satuan` (
   `created_user` smallint(6) NOT NULL,
   `created_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_user` smallint(6) NOT NULL,
-  `updated_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `updated_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `deleted_user` int(11) NOT NULL,
+  `deleted_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data untuk tabel `is_satuan`
 --
 
-INSERT INTO `is_satuan` (`id_satuan`, `nama_satuan`, `created_user`, `created_date`, `updated_user`, `updated_date`) VALUES
-(1, 'Gram', 3, '2017-03-12 02:57:35', 3, '2017-03-12 02:57:45'),
-(2, 'Kilogram', 3, '2017-03-12 02:58:07', 3, '2017-03-12 02:59:01'),
-(3, 'Meter', 3, '2017-03-12 02:58:19', 3, '2017-03-12 02:59:04'),
-(4, 'Liter', 3, '2017-03-12 02:58:25', 3, '2017-03-12 02:59:08'),
-(5, 'Botol', 3, '2017-03-12 02:58:36', 3, '2017-03-12 02:59:10'),
-(6, 'Lebar', 3, '2017-03-12 02:58:46', 3, '2017-03-12 02:59:13'),
-(7, 'Tabung', 3, '2017-03-12 02:58:52', 1, '2023-03-27 03:24:14'),
-(8, 'PCS', 1, '2023-06-27 15:34:56', 1, '2023-06-27 15:34:56'),
-(9, 'Unit', 1, '2023-06-27 15:35:05', 1, '2023-06-27 15:35:05'),
-(10, 'Buah', 1, '2023-06-27 15:35:13', 1, '2023-06-27 15:35:13'),
-(11, 'ekorr', 1, '2024-01-27 05:50:02', 1, '2024-01-27 06:22:09');
+INSERT INTO `is_satuan` (`id_satuan`, `nama_satuan`, `created_user`, `created_date`, `updated_user`, `updated_date`, `deleted_user`, `deleted_date`) VALUES
+(1, 'Gram', 3, '2017-03-12 02:57:35', 3, '2017-03-12 02:57:45', 0, NULL),
+(2, 'Kilogram', 3, '2017-03-12 02:58:07', 3, '2017-03-12 02:59:01', 0, NULL),
+(3, 'Meter', 3, '2017-03-12 02:58:19', 3, '2017-03-12 02:59:04', 0, NULL),
+(4, 'Liter', 3, '2017-03-12 02:58:25', 3, '2017-03-12 02:59:08', 0, NULL),
+(5, 'Botol', 3, '2017-03-12 02:58:36', 3, '2017-03-12 02:59:10', 0, NULL),
+(6, 'Lebar', 3, '2017-03-12 02:58:46', 3, '2017-03-12 02:59:13', 0, NULL),
+(7, 'Tabung', 3, '2017-03-12 02:58:52', 1, '2023-03-27 03:24:14', 0, NULL),
+(8, 'PCS', 1, '2023-06-27 15:34:56', 1, '2023-06-27 15:34:56', 0, NULL),
+(9, 'Unit', 1, '2023-06-27 15:35:05', 1, '2023-06-27 15:35:05', 0, NULL),
+(10, 'Buah', 1, '2023-06-27 15:35:13', 1, '2023-06-27 15:35:13', 0, NULL),
+(11, 'ekorr', 1, '2024-01-27 05:50:02', 1, '2024-01-28 02:50:29', 1, '2024-01-28 09:50:29');
 
 -- --------------------------------------------------------
 
@@ -276,7 +283,7 @@ ALTER TABLE `is_users`
 -- AUTO_INCREMENT untuk tabel `is_jenis_barang`
 --
 ALTER TABLE `is_jenis_barang`
-  MODIFY `id_jenis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_jenis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `is_satuan`

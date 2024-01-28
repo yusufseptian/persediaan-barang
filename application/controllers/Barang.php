@@ -3,22 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Barang extends CI_Controller
 {
-
-    /**
-     * Index Page for this controller.
-     *
-     * Maps to the following URL
-     * 		http://example.com/index.php/welcome
-     *	- or -
-     * 		http://example.com/index.php/welcome/index
-     *	- or -
-     * Since this controller is set as the default controller in
-     * config/routes.php, it's displayed at http://example.com/
-     *
-     * So any other public methods not prefixed with an underscore will
-     * map to /index.php/welcome/<method_name>
-     * @see https://codeigniter.com/user_guide/general/urls.html
-     */
     public function index()
     {
         $this->load->view('login');
@@ -83,12 +67,16 @@ class Barang extends CI_Controller
 
     function delete()
     {
+        require_once "application/connection/database.php";
         if (isset($_GET['id'])) {
             $id_barang = $_GET['id'];
 
             // perintah query untuk menghapus data pada tabel barang
-            $query = mysqli_query($mysqli, "DELETE FROM is_barang WHERE id_barang='$id_barang'")
-                or die('Ada kesalahan pada query delete : ' . mysqli_error($mysqli));
+            // $query = mysqli_query($mysqli, "DELETE FROM is_barang WHERE id_barang='$id_barang'")
+            //     or die('Ada kesalahan pada query delete : ' . mysqli_error($mysqli));
+
+            $query = mysqli_query($mysqli, "UPDATE is_barang SET deleted_user = '$_SESSION[id_user]', deleted_date = now() WHERE id_barang = '$id_barang'")
+                or die('Ada kesalahan pada query Hapus : ' . mysqli_error($mysqli));
 
             // cek hasil query
             if ($query) {
