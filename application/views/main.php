@@ -7,7 +7,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Aplikasi Persediaan Barang</title>
+  <title>Aplikasi Gudang Oricow</title>
   <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="description" content="Aplikasi Aplikasi Persediaan Barang dengan PHP7 dan MySQLi">
@@ -191,11 +191,11 @@
 <body class="skin-blue fixed">
   <div class="wrapper">
 
-    <header class="main-header">
+    <header class="main-header ">
       <!-- Logo -->
-      <a href="?module=home" class="logo">Aplikasi Persediaan</a>
+      <a href="?module=home" class="logo" style="background-color: #f19b1a !important">Gudang Oricow</a>
       <!-- Header Navbar: style can be found in header.less -->
-      <nav class="navbar navbar-static-top" role="navigation">
+      <nav class="navbar navbar-static-top" role="navigation" style="background-color: #f1ae49 !important">
         <!-- Sidebar toggle button-->
         <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
           <span class="sr-only">Toggle navigation</span>
@@ -250,8 +250,8 @@
 
     </div><!-- /.content-wrapper -->
 
-    <footer class="main-footer">
-      <strong>Copyright &copy; <?php echo date('Y') ?> - <a href="#">Aplikasi Persediaan</a>.</strong>
+    <footer class="main-footer text-center">
+      <strong>Copyright &copy; <?php echo date('Y') ?> - <a href="#" style="color: #f19b1a !important">Aplikasi Gudang Oricow</a>.</strong>
     </footer>
   </div><!-- ./wrapper -->
 
