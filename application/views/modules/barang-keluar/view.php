@@ -22,6 +22,7 @@
       if (empty($_GET['alert'])) {
         echo "";
       }
+
       // jika alert = 1
       // tampilkan pesan Sukses "Data Barang Keluar berhasil disimpan"
       elseif ($_GET['alert'] == 1) {
@@ -31,6 +32,7 @@
               Data Barang Keluar berhasil disimpan.
             </div>";
       }
+
       // jika alert = 2
       // tampilkan pesan Sukses "Data Barang Keluar telah disetujui"
       elseif ($_GET['alert'] == 2) {
@@ -40,6 +42,7 @@
               Data Barang Keluar telah disetujui.
             </div>";
       }
+
       // jika alert = 3
       // tampilkan pesan Sukses "Data Barang Keluar telah ditolak"
       elseif ($_GET['alert'] == 3) {
@@ -50,6 +53,7 @@
             </div>";
       }
       ?>
+
 
       <div class="box box-primary">
         <div class="box-body">

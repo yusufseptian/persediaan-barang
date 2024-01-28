@@ -27,7 +27,8 @@ class Home extends AuthController
 
 		// pastikan username dan password adalah berupa huruf atau angka.
 		if (!ctype_alnum($username) or !ctype_alnum($password)) {
-			header("Location: index.php?alert=1");
+			// header("Location: index.php?alert=1");
+			$this->redirectBack('Username atau password salah');
 		} else {
 			// ambil data dari tabel user untuk pengecekan berdasarkan inputan username dan passrword
 			$query = mysqli_query($mysqli, "SELECT * FROM is_users WHERE username='$username' AND password='$password' AND status='aktif'")
@@ -52,7 +53,8 @@ class Home extends AuthController
 
 			// jika data tidak ada, alihkan ke halaman login dan tampilkan pesan = 1
 			else {
-				header("Location: index.php?alert=1");
+				// header("Location: index.php?alert=1");
+				$this->redirectBack('Username atau password salah');
 			}
 		}
 	}
@@ -60,11 +62,8 @@ class Home extends AuthController
 	function dashboard()
 	{
 		$this->load->helper('rbac');
-		$this->authCheck();
-		if ($this->input->get('module') == "barang" || $this->input->get('module') == "jenis" || $this->input->get('module') == "satuan" || $this->input->get('module') == "user") {
-			$this->accessAllowed(['Super Admin']);
-		} elseif ($this->input->get('module') == "barang_masuk" || $this->input->get('module') == "barang_keluar") {
-			$this->accessAllowed(['Super Admin', 'Gudang']);
+		if (!isAllowedModule($this->input->get('module'))) {
+			$this->redirectBack();
 		}
 		$this->load->view('main', 'modules/beranda/view');
 	}

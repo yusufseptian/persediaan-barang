@@ -25,95 +25,97 @@
   <!-- Small boxes (Stat box) -->
   <div class="row">
     <?php
-    // if ($_SESSION['hak_akses']=='Super Admin') { 
-    ?>
-    <div class="col-lg-3 col-xs-6">
-      <!-- small box -->
-      <div style="background-color:#0b44ff;color:#fff" class="small-box">
-        <div class="inner">
-          <?php
-          // fungsi query untuk menampilkan data dari tabel barang
-          $query = mysqli_query($mysqli, "SELECT COUNT(id_barang) as jumlah FROM is_barang")
-            or die('Ada kesalahan pada query tampil Data Barang: ' . mysqli_error($mysqli));
+    if (isAdmin()) : ?>
+      <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div style="background-color:#0b44ff;color:#fff" class="small-box">
+          <div class="inner">
+            <?php
+            // fungsi query untuk menampilkan data dari tabel barang
+            $query = mysqli_query($mysqli, "SELECT COUNT(id_barang) as jumlah FROM is_barang")
+              or die('Ada kesalahan pada query tampil Data Barang: ' . mysqli_error($mysqli));
 
-          // tampilkan data
-          $data = mysqli_fetch_assoc($query);
-          ?>
-          <h3><?php echo $data['jumlah']; ?></h3>
-          <p>Data Barang</p>
+            // tampilkan data
+            $data = mysqli_fetch_assoc($query);
+            ?>
+            <h3><?php echo $data['jumlah']; ?></h3>
+            <p>Data Barang</p>
+          </div>
+          <div class="icon">
+            <i class="fa fa-folder"></i>
+          </div>
+          <a href="?module=form_barang&form=add" class="small-box-footer" title="Tambah Data" data-toggle="tooltip"><i class="fa fa-plus"></i></a>
         </div>
-        <div class="icon">
-          <i class="fa fa-folder"></i>
-        </div>
-        <a href="?module=form_barang&form=add" class="small-box-footer" title="Tambah Data" data-toggle="tooltip"><i class="fa fa-plus"></i></a>
-      </div>
-    </div><!-- ./col -->
+      </div><!-- ./col -->
+    <?php endif ?>
+    <?php if (isStaffGudang() || isAdmin()) : ?>
+      <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div style="background-color:rgb(34, 226, 82);color:#fff" class="small-box">
+          <div class="inner">
+            <?php
+            // fungsi query untuk menampilkan data dari tabel barang masuk
+            $query = mysqli_query($mysqli, "SELECT COUNT(id_barang_masuk) as jumlah FROM is_barang_masuk")
+              or die('Ada kesalahan pada query tampil Data Barang Masuk: ' . mysqli_error($mysqli));
 
-    <div class="col-lg-3 col-xs-6">
-      <!-- small box -->
-      <div style="background-color:rgb(34, 226, 82);color:#fff" class="small-box">
-        <div class="inner">
-          <?php
-          // fungsi query untuk menampilkan data dari tabel barang masuk
-          $query = mysqli_query($mysqli, "SELECT COUNT(id_barang_masuk) as jumlah FROM is_barang_masuk")
-            or die('Ada kesalahan pada query tampil Data Barang Masuk: ' . mysqli_error($mysqli));
+            // tampilkan data
+            $data = mysqli_fetch_assoc($query);
+            ?>
+            <h3><?php echo $data['jumlah']; ?></h3>
+            <p>Barang Masuk</p>
+          </div>
+          <div class="icon">
+            <i class="fa fa-sign-in"></i>
+          </div>
+          <a href="?module=form_barang_masuk&form=add" class="small-box-footer" title="Tambah Data" data-toggle="tooltip"><i class="fa fa-plus"></i></a>
+        </div>
+      </div><!-- ./col -->
 
-          // tampilkan data
-          $data = mysqli_fetch_assoc($query);
-          ?>
-          <h3><?php echo $data['jumlah']; ?></h3>
-          <p>Barang Masuk</p>
-        </div>
-        <div class="icon">
-          <i class="fa fa-sign-in"></i>
-        </div>
-        <a href="?module=form_barang_masuk&form=add" class="small-box-footer" title="Tambah Data" data-toggle="tooltip"><i class="fa fa-plus"></i></a>
-      </div>
-    </div><!-- ./col -->
+      <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div style="background-color:rgb(255, 39, 39);color:#fff" class="small-box">
+          <div class="inner">
+            <?php
+            // fungsi query untuk menampilkan data dari tabel barang Keluar
+            $query = mysqli_query($mysqli, "SELECT COUNT(id_barang_keluar) as jumlah FROM is_barang_keluar")
+              or die('Ada kesalahan pada query tampil Data Barang Keluar: ' . mysqli_error($mysqli));
 
-    <div class="col-lg-3 col-xs-6">
-      <!-- small box -->
-      <div style="background-color:rgb(255, 39, 39);color:#fff" class="small-box">
-        <div class="inner">
-          <?php
-          // fungsi query untuk menampilkan data dari tabel barang Keluar
-          $query = mysqli_query($mysqli, "SELECT COUNT(id_barang_keluar) as jumlah FROM is_barang_keluar")
-            or die('Ada kesalahan pada query tampil Data Barang Keluar: ' . mysqli_error($mysqli));
+            // tampilkan data
+            $data = mysqli_fetch_assoc($query);
+            ?>
+            <h3><?php echo $data['jumlah']; ?></h3>
+            <p>Barang Keluar</p>
+          </div>
+          <div class="icon">
+            <i class="fa fa-sign-out"></i>
+          </div>
+          <a href="?module=form_barang_keluar&form=add" class="small-box-footer" title="Tambah Data" data-toggle="tooltip"><i class="fa fa-plus"></i></a>
+        </div>
+      </div><!-- ./col -->
+    <?php endif ?>
+    <?php if (isAdmin()) : ?>
+      <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div style="background-color:#f19b1a;color:#fff" class="small-box">
+          <div class="inner">
+            <?php
+            // fungsi query untuk menampilkan data dari tabel user
+            $query = mysqli_query($mysqli, "SELECT COUNT(id_user) as jumlah FROM is_users")
+              or die('Ada kesalahan pada query tampil Data User: ' . mysqli_error($mysqli));
 
-          // tampilkan data
-          $data = mysqli_fetch_assoc($query);
-          ?>
-          <h3><?php echo $data['jumlah']; ?></h3>
-          <p>Barang Keluar</p>
+            // tampilkan data
+            $data = mysqli_fetch_assoc($query);
+            ?>
+            <h3><?php echo $data['jumlah']; ?></h3>
+            <p>User</p>
+          </div>
+          <div class="icon">
+            <i class="fa fa-user"></i>
+          </div>
+          <a href="?module=form_user&form=add" class="small-box-footer" title="Tambah Data" data-toggle="tooltip"><i class="fa fa-plus"></i></a>
         </div>
-        <div class="icon">
-          <i class="fa fa-sign-out"></i>
-        </div>
-        <a href="?module=form_barang_keluar&form=add" class="small-box-footer" title="Tambah Data" data-toggle="tooltip"><i class="fa fa-plus"></i></a>
-      </div>
-    </div><!-- ./col -->
-
-    <div class="col-lg-3 col-xs-6">
-      <!-- small box -->
-      <div style="background-color:#f19b1a;color:#fff" class="small-box">
-        <div class="inner">
-          <?php
-          // fungsi query untuk menampilkan data dari tabel user
-          $query = mysqli_query($mysqli, "SELECT COUNT(id_user) as jumlah FROM is_users")
-            or die('Ada kesalahan pada query tampil Data User: ' . mysqli_error($mysqli));
-
-          // tampilkan data
-          $data = mysqli_fetch_assoc($query);
-          ?>
-          <h3><?php echo $data['jumlah']; ?></h3>
-          <p>User</p>
-        </div>
-        <div class="icon">
-          <i class="fa fa-user"></i>
-        </div>
-        <a href="?module=form_user&form=add" class="small-box-footer" title="Tambah Data" data-toggle="tooltip"><i class="fa fa-plus"></i></a>
-      </div>
-    </div><!-- ./col -->
+      </div><!-- ./col -->
+    <?php endif ?>
     <?php
     //} elseif ($_SESSION['hak_akses']=='Gudang') { 
     ?>
