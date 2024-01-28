@@ -27,7 +27,8 @@ class Home extends AuthController
 
 		// pastikan username dan password adalah berupa huruf atau angka.
 		if (!ctype_alnum($username) or !ctype_alnum($password)) {
-			header("Location: index.php?alert=1");
+			// header("Location: index.php?alert=1");
+			$this->redirectBack('Username atau password salah');
 		} else {
 			// ambil data dari tabel user untuk pengecekan berdasarkan inputan username dan passrword
 			$query = mysqli_query($mysqli, "SELECT * FROM is_users WHERE username='$username' AND password='$password' AND status='aktif'")
