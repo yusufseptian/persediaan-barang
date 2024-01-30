@@ -28,7 +28,7 @@ $data = mysqli_fetch_assoc($query);
   </a>
   <ul class="dropdown-menu">
     <!-- User image -->
-    <li class="user-header" style="background-color: #f19b1a !important">
+    <li class="user-header" style="background-color: #98191c !important">
 
       <?php
       if ($data['foto'] == "") { ?>
@@ -40,7 +40,7 @@ $data = mysqli_fetch_assoc($query);
       }
       ?>
 
-      <p>
+      <p style="color: #fff;">
         <?php echo $data['nama_user']; ?>
         <small><?php echo $data['hak_akses']; ?></small>
 

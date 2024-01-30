@@ -22,7 +22,18 @@ $count  = mysqli_num_rows($query);
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <title>Laporan Stok Barang</title>
+    <!-- JQuery -->
+    <script src="<?= base_url('assets/plugins/jQuery/jQuery-2.1.3.min.js') ?>"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="<?= base_url('assets/plugins/bootstrap/5.3/css/bootstrap.min.css') ?>">
+    <script src="<?= base_url('assets/plugins/bootstrap/5.3/js/bootstrap.bundle.min.js') ?>"></script>
+    <!-- Native -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/css/laporan.css" />
+    <style>
+        .table>thead>tr>th {
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -33,7 +44,7 @@ $count  = mysqli_num_rows($query);
     <hr><br>
 
     <div id="isi">
-        <table width="100%" border="0.3" cellpadding="0" cellspacing="0">
+        <table class="table table-bordered table-sm" width="100%" cellpadding="0" cellspacing="0">
             <thead style="background:#e8ecee">
                 <tr class="tr-title">
                     <th height="20" align="center" valign="middle">No.</th>
@@ -74,6 +85,12 @@ $count  = mysqli_num_rows($query);
             <?= $_SESSION['nama_user'] ?>
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            window.print();
+            window.close();
+        })
+    </script>
 </body>
 
 </html><!-- Akhir halaman HTML yang akan di konvert -->

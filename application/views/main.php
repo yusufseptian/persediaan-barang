@@ -185,6 +185,7 @@
       return false;
     }
   </script>
+  <link rel="icon" type="image/x-icon" href="<?= base_url('assets/images/sys/logo-transparent.png') ?>">
 
 </head>
 
@@ -193,9 +194,12 @@
 
     <header class="main-header ">
       <!-- Logo -->
-      <a href="?module=home" class="logo" style="background-color: #f19b1a !important">Gudang Oricow</a>
+      <a href="?module=home" class="logo" style="background-color: #98191c !important">
+        <img src="<?= base_url('assets/images/sys/logo.jpg') ?>" alt="" style="height: 30px; border-radius: 5px;">
+        Gudang Oricow
+      </a>
       <!-- Header Navbar: style can be found in header.less -->
-      <nav class="navbar navbar-static-top" role="navigation" style="background-color: #f1ae49 !important">
+      <nav class="navbar navbar-static-top" role="navigation" style="background-color: #D04848 !important">
         <!-- Sidebar toggle button-->
         <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
           <span class="sr-only">Toggle navigation</span>
@@ -251,7 +255,7 @@
     </div><!-- /.content-wrapper -->
 
     <footer class="main-footer text-center">
-      <strong>Copyright &copy; <?php echo date('Y') ?> - <a href="#" style="color: #f19b1a !important">Aplikasi Gudang Oricow</a>.</strong>
+      <strong>Copyright &copy; <?php echo date('Y') ?> - <a href="#" style="color: #98191c !important">Aplikasi Gudang Oricow</a>.</strong>
     </footer>
   </div><!-- ./wrapper -->
 

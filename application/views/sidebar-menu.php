@@ -4,7 +4,13 @@
 //if ($_SESSION['hak_akses']=='Super Admin') { 
 ?>
 <!-- sidebar menu start -->
-<ul class="sidebar-menu">
+<style>
+	.skin-blue .sidebar-menu>li:hover>a,
+	.skin-blue .sidebar-menu>li.active>a {
+		border-color: #D04848 !important;
+	}
+</style>
+<ul id="#sideBarMenu" class="sidebar-menu">
 	<li class="header">MAIN MENU</li>
 
 	<?php

@@ -35,7 +35,18 @@ if (isset($_GET['tgl_awal'])) {
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <title>LAPORAN DATA BARANG MASUK</title>
+    <!-- JQuery -->
+    <script src="<?= base_url('assets/plugins/jQuery/jQuery-2.1.3.min.js') ?>"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="<?= base_url('assets/plugins/bootstrap/5.3/css/bootstrap.min.css') ?>">
+    <script src="<?= base_url('assets/plugins/bootstrap/5.3/js/bootstrap.bundle.min.js') ?>"></script>
+    <!-- Native -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/css/laporan.css" />
+    <style>
+        .table>thead>tr>th {
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -117,6 +128,12 @@ if (isset($_GET['tgl_awal'])) {
             <?= $_SESSION['nama_user'] ?>
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            window.print();
+            window.close();
+        })
+    </script>
 </body>
 
 </html><!-- Akhir halaman HTML yang akan di konvert -->
