@@ -131,7 +131,12 @@ if (isset($_GET['tgl_awal'])) {
     <script>
         $(document).ready(function() {
             window.print();
-            window.close();
+            if (typeof InstallTrigger !== "undefined") {
+                window.close();
+            }
+            window.onafterprint = function() {
+                window.close();
+            }
         })
     </script>
 </body>

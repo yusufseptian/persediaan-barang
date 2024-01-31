@@ -13,8 +13,8 @@
   <meta name="description" content="Aplikasi Aplikasi Persediaan Barang dengan PHP7 dan MySQLi">
   <meta name="author" content="Indra Styawantoro" />
 
-  <!-- favicon -->
-  <link rel="shortcut icon" href="<?php echo base_url() ?>assets/img/favicon.png" />
+  <link rel="icon" type="image/x-icon" href="<?= base_url('assets/images/sys/logo-transparent.ico') ?>">
+  <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('assets/images/sys/logo-transparent.ico') ?>">
 
   <!-- Bootstrap 3.3.2 -->
   <link href="<?php echo base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -185,7 +185,6 @@
       return false;
     }
   </script>
-  <link rel="icon" type="image/x-icon" href="<?= base_url('assets/images/sys/logo-transparent.png') ?>">
 
 </head>
 

@@ -88,7 +88,12 @@ $count  = mysqli_num_rows($query);
     <script>
         $(document).ready(function() {
             window.print();
-            window.close();
+            if (typeof InstallTrigger !== "undefined") {
+                window.close();
+            }
+            window.onafterprint = function() {
+                window.close();
+            }
         })
     </script>
 </body>
