@@ -51,7 +51,7 @@ if (isset($_GET['tgl_awal'])) {
 
 <body>
     <div id="title">
-        LAPORAN DATA BARANG KELUAR
+        LAPORAN DATA BARANG KELUAR GUDANG ORICOW
     </div>
     <?php
     if ($tgl_awal == $tgl_akhir) { ?>
@@ -118,7 +118,7 @@ if (isset($_GET['tgl_awal'])) {
         </table>
 
         <div id="footer-tanggal">
-            Bandarlampung, <?php echo tgl_eng_to_ind("$hari_ini"); ?>
+            Yogyakarta, <?php echo tgl_eng_to_ind("$hari_ini"); ?>
         </div>
         <div id="footer-jabatan">
             Pimpinan

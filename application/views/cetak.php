@@ -38,7 +38,7 @@ $count  = mysqli_num_rows($query);
 
 <body>
     <div id="title">
-        LAPORAN STOK BARANG GUDANG MATERIAL
+        LAPORAN STOK BARANG GUDANG ORICOW
     </div>
 
     <hr><br>
@@ -75,7 +75,7 @@ $count  = mysqli_num_rows($query);
         </table>
 
         <div id="footer-tanggal">
-            Bandarlampung, <?php echo tgl_eng_to_ind("$hari_ini"); ?>
+            Yogyakarta, <?php echo tgl_eng_to_ind("$hari_ini"); ?>
         </div>
         <div id="footer-jabatan">
             Pimpinan
